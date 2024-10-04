@@ -10,5 +10,8 @@ RUN apt-get -y update && apt-get -y install curl
 # Copy the hello.sh file from this directory to /usr/src/app/ creating /usr/src/app/hello.sh
 COPY script.sh .
 
+# Grant permission
+RUN chmod +x script.sh
+
 # When running docker run the command will be ./hello.sh
-CMD ./script.sh
+ENTRYPOINT ["./script.sh"]
