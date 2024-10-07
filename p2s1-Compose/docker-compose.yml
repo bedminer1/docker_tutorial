@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  yt-dlp-ubuntu:
+    image: bedminer1/docker_tutorial
+    build: .
+    volumes:
+      - .:/mydir
+    container_name: yt-dlp
