@@ -6,4 +6,4 @@ services:
     build: .
     volumes:
       - .:/mydir
-    container_name: yt-dlp
+    container_name: yt-dlp.7
