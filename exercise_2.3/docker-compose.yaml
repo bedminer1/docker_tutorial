@@ -6,10 +6,22 @@ services:
     ports:
       - 5100:5000
     build: ./frontend
+    depends_on:
+      - backend
 
   backend:
     container_name: backend
     ports:
       - 8080:8080
     build: ./backend
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+# exercise 2.4
+  redis:
+    container_name: redis-cache
+    image: redis
+    restart: unless-stopped
+
 
