@@ -17,3 +17,7 @@ services:
       ports:
         - 80:80
       container_name: load-balancer
+
+# solution to this exercise is to run 
+# docker compose up --scale compute=3
+# creating more 'compute' containers to scale horizontally
