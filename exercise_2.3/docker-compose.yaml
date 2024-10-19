@@ -8,6 +8,8 @@ services:
     build: ./frontend
     depends_on:
       - backend
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:80
 
   backend:
     container_name: backend
@@ -23,6 +25,7 @@ services:
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      REQUEST_ORIGIN: http://localhost:80
 
 # exercise 2.4, linking up redis caching
   redis:
@@ -42,6 +45,19 @@ services:
     container_name: db
     volumes:
       - ./database:/var/lib/postgresql/data
+
+# exercise 2.8 adding nginx
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
 
 
 
