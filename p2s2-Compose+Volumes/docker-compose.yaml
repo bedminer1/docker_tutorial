@@ -16,16 +16,18 @@ services:
       - REDMINE_DB_PASSWORD=example
     ports:
       - 9999:3000
+    volumes:
+      - files:/usr/src/redmine/files
     depends_on:
       - db
   adminer:
     image: adminer:4
     restart: always
-    environments:
+    environment:
       - ADMINER_DESIGN=galkaev
+      - ADMINER_DEFAULT_SERVER=database_server
     ports:
       - 8083:8080
-    # adminer sets DNS name of database to db
 
 volumes:
   database:

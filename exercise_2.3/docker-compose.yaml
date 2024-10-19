@@ -16,12 +16,33 @@ services:
     build: ./backend
     depends_on:
       - redis
+      - db
     environment:
       REDIS_HOST: redis
-# exercise 2.4
+      POSTGRES_DATABASE: postgres
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+# exercise 2.4, linking up redis caching
   redis:
     container_name: redis-cache
     image: redis
     restart: unless-stopped
+
+# exercise 2.6, linking up postgres
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DATABASE: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    container_name: db
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+
 
 
